@@ -9,7 +9,10 @@ public class CardScript : MonoBehaviour
     SpriteRenderer[] squares;
     Dictionary<string, Color> colorDictionary = new Dictionary<string, Color>();
     Color[][] colors;
-    
+
+    string[] ALPHABET = { "A", "B", "C" };
+    Dictionary<string, Color> cardDictionary = new Dictionary<string, Color>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,18 +30,24 @@ public class CardScript : MonoBehaviour
         //      new Color(107, 39, 16, 255),
         //      new Color(117, 34, 20, 255)
         //    },{ }
-        colorDictionary.Add("A,0", new Color(97f/255f, 43f/255, 15f/255f,1));
-        colorDictionary.Add("A,1", new Color(107f/255f, 39/255f, 16/255f, 1));
-        colorDictionary.Add("A,2", new Color(117f/255f, 34f/255f, 20f/255f, 1));
-        colorDictionary.Add("B,0", new Color(136f/255f, 75f/255f, 31f/255f, 1));
-        colorDictionary.Add("B,1", new Color(148f/255f, 68f/255f, 31f/255f, 1));
-        colorDictionary.Add("B,2", new Color(156f/255f, 63/255f, 32f/255f, 1));
-        colorDictionary.Add("C,0", new Color(166f/255f, 97f/255f, 40/255f, 1));
-        colorDictionary.Add("C,1", new Color(172/255f, 91/255f, 38/255f, 1));
-        colorDictionary.Add("C,2", new Color(186f/255f, 90f/255f, 39f/255f, 1));
+        colorDictionary.Add("0,A", new Color(97f/255f, 43f/255, 15f/255f,1));
+        colorDictionary.Add("1,A", new Color(107f/255f, 39/255f, 16/255f, 1));
+        colorDictionary.Add("2,A", new Color(117f/255f, 34f/255f, 20f/255f, 1));
+        colorDictionary.Add("0,B", new Color(136f/255f, 75f/255f, 31f/255f, 1));
 
-        //TODO: Random
-        squares[0].color = colorDictionary["A,0"];
+        for (int i = 0; i<4; i++)
+        {
+            int x = ((int)Random.Range(0f, 3f))/3;
+            int y = ((int)Random.Range(0f, 3f))%2;
+            while(!cardDictionary.ContainsKey(x + "," + ALPHABET[y]))
+            {
+                x = ((int)Random.Range(0f, 3f)) / 3;
+                y = ((int)Random.Range(0f, 3f)) % 2;
+                MonoBehaviour.print(x + "," + ALPHABET[y]);
+            }
+            squares[i].color = colorDictionary[x + "," + ALPHABET[y]];
+            cardDictionary[x + "," + ALPHABET[y]] = squares[i].color;
+        }
        
     }
 
