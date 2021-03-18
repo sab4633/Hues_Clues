@@ -26,13 +26,14 @@ public class Example : MonoBehaviour
         square = GameObject.Find("Square1").GetComponent<SpriteRenderer>();
     }
 
-    private void OnMouseDown()
+   void OnMouseDown()
     {
         square.color = Color.green;
         m_SpriteRenderer.color = Color.cyan;
         MonoBehaviour.print("hello");
 
     }
+
 
     void OnGUI()
     {
